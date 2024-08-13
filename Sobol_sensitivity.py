@@ -35,8 +35,20 @@ problem = {
     ]
 }
 # %%
-param_values = saltelli.sample(problem, 3000)
+param_values = saltelli.sample(problem, 1000)
 # %%
 np.savetxt("param_values.csv", param_values)
 
+# %%
+Y = np.loadtxt("outputs.txt", float)
+
+# %%
+Y2 = Y[:,0]
+# %%
+Si = sobol.analyze(problem, Y2)
+# %%
+print(Si['ST'])
+
+# %%
+total_Si, first_Si, second_Si = Si.to_df()
 # %%
